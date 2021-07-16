@@ -22,7 +22,7 @@ successfully pushed.
 ## Assessment Tasks
 
 1. Use ajax to grab data from the provided json file and display each row from the data as a bootstrap card within the div with the id `card-parent`.
-- refer to 
+- refer to ajax exercises for how you can do this.
 
 2. When you hover over p tag with the id `p-for-hover`, change its text to "Hovering over a p". When you stop hovering over that p, change its text back to the original text.
 
