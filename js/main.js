@@ -1,57 +1,65 @@
 "use strict"
-$(document).ready(function (){
+$(document).ready(function () {
     // 1.
-    $.ajax("data/users.json").done(function(data) {
+    $.ajax("data/users.json").done(function (data) {
         var html = "";
-        for (let i = 0; i < 3; i++) {
-            var user = data[i];
-            html += "<div class=\"card\" style=\"width: 18rem;\">\n" +
-                "  <div class=\"card-body\">\n" +
-                "    <h5 class=\"card-title\">User " + user.id + "</h5>\n" +
-                "    <h6 class=\"card-subtitle mb-2 text-muted\">" + user.first_name + " " + user.last_name + "</h6>\n" +
-                "    <p class=\"card-text\">Email: " + user.email + "</p>\n" +
-                "  </div>\n" +
-                "</div>";
+        for (var i = 0; i < 3; i++) {
+            html += `<div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${data[i].id}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${data[i].first_name} ${data[i].last_name}</h6>
+                            <p class="card-text">${data[0].email}</p>
+                        </div>
+                     </div>`;
         }
+        // set the card html to the inner html of the card-parent div
         $("#card-parent").html(html);
     });
 
     // 2.
-    $("#p-for-hover").hover(function () {
-        $(this).html("Hovering over a p");
-    }, function () {
-        $(this).html("Waiting for a hover!");
-    });
+    $('#p-for-hover').hover(
+        function() {
+            $(this).html("Hovering over a p");
+        },
+        function() {
+            $(this).html("Waiting for a hover!");
+        }
+    );
 
     // 3.
+    $(".color-button").css("background-color", "orange");
     $(".color-button").click(function () {
-        $(".color-button").removeClass("button-green");
-        $(this).addClass("button-green");
+        // reset all button colors to orange
+        $(".color-button").css("background-color", "orange");
+        $(this).css("background-color", "green");
     });
 
     // 4.
     $("#border-toggle").click(function () {
         $(this).toggleClass("h1-border");
-    });
+    })
 
     // 5.
     var rowCounter = 1;
     $("#add-row").click(function () {
-        var html = $("#simple-table-body").html();
-        html += "<tr><td>" + rowCounter + "</td>";
-        html += "<td>hello</td>";
-        html += "<td>world</td></tr>";
+        var previousHTML = $("#simple-table-body").html();
+        var newHTML = `<tr>
+            <td>${rowCounter}</td>
+            <td>hello</td>
+            <td>world</td>
+        </tr>`;
+        $("#simple-table-body").html(previousHTML + newHTML);
 
-        $("#simple-table-body").html(html);
         rowCounter++;
-    });
+    })
 
     // 6.
-    for (let i = 4; i < 11; i++) {
-        var html = $("#lots-of-list-items").html();
-        html += "<li>Item " + i + "</li>";
-        $("#lots-of-list-items").html(html);
+    var oldLIs = $("#lots-of-list-items").html();
+    var newLI = "";
+    for(var i = 4; i <= 10; i++) {
+        newLI += `<li>Item ${i}</li>`;
     }
+    $("#lots-of-list-items").html(oldLIs + newLI)
 
     // 7.
     $("li").click(function () {
